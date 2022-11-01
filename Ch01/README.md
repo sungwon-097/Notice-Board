@@ -68,3 +68,5 @@
 
 -   시스템의 동작을 사용자의 입장에서 표현한 시나리오이며, 시스템에 관련된 요구사항을 알아내는 과정
 -   실선은 연관관계, 실선은 포함(include)관계 또는 확장(exclude)
+-   [use-case.svg](/document/use-case.svg)
+-   [project-board-erd.svg](/document/project-board-erd.svg)
