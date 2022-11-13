@@ -22,8 +22,8 @@ import java.util.Set;
 @Table(indexes = {
         @Index(columnList = "title"),
         @Index(columnList = "hashtag"),
-        @Index(columnList = "createAt"),
-        @Index(columnList = "createBy")
+        @Index(columnList = "createdAt"),
+        @Index(columnList = "createdBy")
 })
 @EntityListeners(AuditingEntityListener.class)
 @Entity
@@ -47,10 +47,10 @@ public class Article {
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
     @CreatedDate @Column(nullable = false)
-    private LocalDateTime createAt; // 생성자
+    private LocalDateTime createdAt; // 생성자
 
     @CreatedBy @Column(nullable = false, length = 100)
-    private String createBy;
+    private String createdBy;
 
     @LastModifiedDate @Column(nullable = false)
     private LocalDateTime modifiedAt; // 수정자
