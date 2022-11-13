@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ActiveProfiles("testdb")
+//@ActiveProfiles("testdb")
 @DisplayName("JPA 연결 CRUD 테스트")
 @Import(JpaConfig.class)
 @DataJpaTest
@@ -37,7 +37,7 @@ class JpaRepositoryTest {
 
         assertThat(articleList)
                 .isNotNull()
-                .hasSize(0);
+                .hasSize(100);
         // mockaroo 를 사용하여 data.sql 파일에 입력 후 확인 가능
     }
 
@@ -56,12 +56,12 @@ class JpaRepositoryTest {
     void updateTest(){
 
         Article article = articleRepository.findById(1L).orElseThrow();
-        String hashtag = "springboot";
-        article.setHashtag(hashtag);
+        String updatedHashtag = "#springboot";
+        article.setHashtag(updatedHashtag);
 
         Article savedArticle = articleRepository.saveAndFlush(article);
 
-        assertThat(articleRepository.count()).hasFieldOrPropertyWithValue("hashtag", hashtag);
+        assertThat(savedArticle).hasFieldOrPropertyWithValue("hashtag", updatedHashtag);
     }
 
     @DisplayName("Delete Test")
