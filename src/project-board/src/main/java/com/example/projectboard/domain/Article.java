@@ -23,11 +23,10 @@ import java.util.Set;
         @Index(columnList = "title"),
         @Index(columnList = "hashtag"),
         @Index(columnList = "createdAt"),
-        @Index(columnList = "createdBy")
+        @Index(columnList = "createdBy") // index 는 AuditingField 로 옮기지 않음
 })
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Article {
+public class Article extends AuditingFields{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,18 +44,6 @@ public class Article {
     @OrderBy("id")
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
-
-    @CreatedDate @Column(nullable = false)
-    private LocalDateTime createdAt; // 생성자
-
-    @CreatedBy @Column(nullable = false, length = 100)
-    private String createdBy;
-
-    @LastModifiedDate @Column(nullable = false)
-    private LocalDateTime modifiedAt; // 수정자
-
-    @LastModifiedBy @Column(nullable = false, length = 100)
-    private String modifiedBy;
 
     protected Article(){}
 
