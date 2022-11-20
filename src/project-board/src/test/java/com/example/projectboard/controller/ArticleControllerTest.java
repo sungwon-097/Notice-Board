@@ -1,5 +1,6 @@
 package com.example.projectboard.controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@Disabled("구현중") // ignoring test
 @DisplayName("View Controller - 게시글")
 @WebMvcTest(ArticleController.class)
 class ArticleControllerTest {
@@ -25,7 +27,8 @@ class ArticleControllerTest {
         mvc.perform(MockMvcRequestBuilders.get("/articles"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.TEXT_HTML))
-                .andExpect(model().attributeExists("articles")); // articles 라는 이름의 attribute 가 model 에 존재하는지
+                .andExpect(view().name("articles/index")) // 해당 경로에 view 가 존재하는지 확인
+                .andExpect(model().attributeExists("articles")); // articles 라는 이름의 attribute 가 model 에 존재하는지 확인
 
     }
 
@@ -35,7 +38,9 @@ class ArticleControllerTest {
         mvc.perform(MockMvcRequestBuilders.get("/articles/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.TEXT_HTML))
-                .andExpect(model().attributeExists("articles")); // articles 라는 이름의 attribute 가 model 에 존재하는지
+                .andExpect(view().name("articles/details"))
+                .andExpect(model().attributeExists("articles"))
+                .andExpect(model().attributeExists("articleComments")); // articles 라는 이름의 attribute 가 model 에 존재하는지
     }
 
     @DisplayName("[view] [GET] 게시글 검색 전용 페이지 - 정상 호출")
@@ -43,6 +48,7 @@ class ArticleControllerTest {
     void name2() throws Exception{
         mvc.perform(MockMvcRequestBuilders.get("/articles/search"))
                 .andExpect(status().isOk())
+                .andExpect(view().name("articles/search"))
                 .andExpect(content().contentType(MediaType.TEXT_HTML));
     }
 
@@ -51,6 +57,7 @@ class ArticleControllerTest {
     void name3() throws Exception{
         mvc.perform(MockMvcRequestBuilders.get("/articles/search-hashtag"))
                 .andExpect(status().isOk())
+                .andExpect(view().name("articles/hashtag"))
                 .andExpect(content().contentType(MediaType.TEXT_HTML));
     }
 }
