@@ -1,10 +1,12 @@
 package com.example.projectboard.controller;
 
+import com.example.projectboard.config.SecurityConfig;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -13,6 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 //@Disabled("구현중") // ignoring test
 @DisplayName("View Controller - 게시글")
+@Import(SecurityConfig.class)
 @WebMvcTest(ArticleController.class)
 class ArticleControllerTest {
     private final MockMvc mvc;
@@ -29,7 +32,6 @@ class ArticleControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("articles/index")) // 해당 경로에 view 가 존재하는지 확인
                 .andExpect(model().attributeExists("articles")); // articles 라는 이름의 attribute 가 model 에 존재하는지 확인
-
     }
 
     @DisplayName("[view] [GET] 게시글 상세 페이지 - 정상 호출")
@@ -38,8 +40,8 @@ class ArticleControllerTest {
         mvc.perform(MockMvcRequestBuilders.get("/articles/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-                .andExpect(view().name("article/detail"))
-                .andExpect(model().attributeExists("articles"))
+                .andExpect(view().name("articles/detail"))
+                .andExpect(model().attributeExists("article"))
                 .andExpect(model().attributeExists("articleComments")); // articles 라는 이름의 attribute 가 model 에 존재하는지
     }
 
