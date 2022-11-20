@@ -1,4 +1,4 @@
-# Notice-Serice
+# Notice-Board
 
 -   개발환경
     1. IntelliJ IDEA Ultimate 2022.1.1
