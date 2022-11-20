@@ -35,7 +35,14 @@ dependencies {
 	testCompileOnly 'org.springframework.boot:spring-boot-starter-test'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// View Engine
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	// Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// queryDSL 설정
