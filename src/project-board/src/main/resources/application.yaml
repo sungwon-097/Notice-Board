@@ -21,17 +21,16 @@ spring:
   jpa:
     open-in-view: false
     defer-datasource-initialization: true
-    hibernate.ddl-auto: create
+    hibernate.ddl-auto: update
     show-sql: true
     properties:
       hibernate.format_sql: true
       hibernate.default_batch_fetch_size: 100
 #    h2.console.enabled: true
     sql.init.mode: always
-
-#    data.rest:
-#      base-path: /api
-#      detection-strategy: annotated
+    data.rest:
+      base-path: /api
+      detection-strategy: annotated
 #
 #---
 #
