@@ -38,7 +38,7 @@ class ArticleControllerTest {
         mvc.perform(MockMvcRequestBuilders.get("/articles/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-                .andExpect(view().name("articles/details"))
+                .andExpect(view().name("article/detail"))
                 .andExpect(model().attributeExists("articles"))
                 .andExpect(model().attributeExists("articleComments")); // articles 라는 이름의 attribute 가 model 에 존재하는지
     }
