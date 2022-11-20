@@ -37,7 +37,7 @@ class ArticleControllerTest {
     void name1() throws Exception{
         mvc.perform(MockMvcRequestBuilders.get("/articles/1"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("articles/details"))
                 .andExpect(model().attributeExists("articles"))
                 .andExpect(model().attributeExists("articleComments")); // articles 라는 이름의 attribute 가 model 에 존재하는지
@@ -49,7 +49,7 @@ class ArticleControllerTest {
         mvc.perform(MockMvcRequestBuilders.get("/articles/search"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("articles/search"))
-                .andExpect(content().contentType(MediaType.TEXT_HTML));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 
     @DisplayName("[view] [GET] 게시글 해시태그 검색 페이지 - 정상 호출")
@@ -58,6 +58,6 @@ class ArticleControllerTest {
         mvc.perform(MockMvcRequestBuilders.get("/articles/search-hashtag"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("articles/hashtag"))
-                .andExpect(content().contentType(MediaType.TEXT_HTML));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 }
