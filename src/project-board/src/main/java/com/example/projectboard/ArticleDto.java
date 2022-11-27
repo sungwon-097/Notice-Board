@@ -8,8 +8,9 @@ public record ArticleDto(
         String content,
         String hashtag,
         LocalDateTime createAt,
-        String createBy,
-        LocalDateTime modifiedAt,
-        String modifiedBy
+        String createBy
 ) implements Serializable {
+    public static ArticleDto of(String title, String content, String hashtag, LocalDateTime createAt, String createBy) {
+        return new ArticleDto(title, content, hashtag, createAt, createBy);
+    }
 }
